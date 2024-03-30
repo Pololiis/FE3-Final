@@ -1,19 +1,28 @@
-import React from 'react'
 import { Link } from "react-router-dom";
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+import { useTheme } from "../Context";
 
 const Navbar = () => {
+	const { theme, dispatch } = useTheme();
 
-  return (
-    <nav>
-      {/* Deberan implementar ademas la logica para cambiar de Theme con el button */}
-      <Link to="/">Home</Link>
-      <Link to="/favs">Favs</Link>
-      <Link to="/contact">Contact</Link>
-      <button>Change theme</button>
-    </nav>
-  )
-}
+	const handleClick = (e) => {
+		e.preventDefault();
+		dispatch({ type: "CHANGE_THEME" });
+	};
 
-export default Navbar
+	return (
+		<nav className={theme}>
+			<div className="navLinks">
+				<Link to="/">Home</Link>
+				<Link to="/favs">Favs</Link>
+				<Link to="/contact">Contact</Link>
+			</div>
+			<div>
+				<button onClick={handleClick} className="themeButton">
+					Change theme
+				</button>
+			</div>
+		</nav>
+	);
+};
+
+export default Navbar;

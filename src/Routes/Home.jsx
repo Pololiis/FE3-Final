@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Card from "../Components/Card";
 import axios from "axios";
-
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+import { useTheme } from "../Context";
 
 const Home = () => {
 	const url = "https://jsonplaceholder.typicode.com/users";
-
+	const { theme } = useTheme();
 	const [ list, setList ] = useState([]);
 
 	useEffect(() => {
@@ -16,10 +15,10 @@ const Home = () => {
 	}, []);
 
 	return (
-		<main className="">
+		<main className={theme} style={{paddingBottom: "2rem"}}>
 			<h1>Home</h1>
 			<div className="card-grid">
-				{list && list.map( odontologo => <Card key={odontologo.id} item={odontologo} />)}
+				{list && list.map( dentist => <Card key={dentist.id} item={dentist} />)}
 			</div>
 		</main>
 	);
